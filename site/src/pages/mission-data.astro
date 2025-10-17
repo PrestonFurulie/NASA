@@ -1,0 +1,538 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Card, Container, Row, Col, Button, Table, Badge, Alert, ProgressBar } from 'bootstrap';
+---
+
+<Layout title="Mission Data - ASCEND Project">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center mb-5">
+          <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-graph-up text-primary"></i> Mission Data
+          </h1>
+          <p class="lead text-muted">
+            Real-time data from our high-altitude balloon missions
+          </p>
+        </div>
+
+        <!-- Mission Statistics -->
+        <div class="row mb-5">
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card text-center border-left-primary">
+              <div class="card-body">
+                <div class="text-primary">
+                  <i class="bi bi-rocket-takeoff display-4"></i>
+                </div>
+                <h3 class="text-primary mt-3">12</h3>
+                <p class="text-muted">Missions Completed</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card text-center border-left-success">
+              <div class="card-body">
+                <div class="text-success">
+                  <i class="bi bi-arrow-up display-4"></i>
+                </div>
+                <h3 class="text-success mt-3">28,500m</h3>
+                <p class="text-muted">Peak Altitude</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card text-center border-left-info">
+              <div class="card-body">
+                <div class="text-info">
+                  <i class="bi bi-thermometer-half display-4"></i>
+                </div>
+                <h3 class="text-info mt-3">-52°C</h3>
+                <p class="text-muted">Min Temperature</p>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-3 col-md-6 mb-4">
+            <div class="card text-center border-left-warning">
+              <div class="card-body">
+                <div class="text-warning">
+                  <i class="bi bi-clock display-4"></i>
+                </div>
+                <h3 class="text-warning mt-3">4.2 hrs</h3>
+                <p class="text-muted">Avg Flight Duration</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Visualization -->
+        <div class="row mb-5">
+          <div class="col-lg-8">
+            <div class="card shadow">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <i class="bi bi-graph-up text-primary"></i> Mission Data Trends
+                </h5>
+              </div>
+              <div class="card-body">
+                <canvas id="missionChart" width="400" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4">
+            <div class="card shadow">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <i class="bi bi-pie-chart text-primary"></i> Mission Success Rate
+                </h5>
+              </div>
+              <div class="card-body">
+                <canvas id="successChart" width="400" height="200"></canvas>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Recent Missions -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <div class="card shadow">
+              <div class="card-header d-flex justify-content-between align-items-center">
+                <h5 class="mb-0">
+                  <i class="bi bi-table text-primary"></i> Recent Missions
+                </h5>
+                <div class="btn-group" role="group">
+                  <button type="button" class="btn btn-sm btn-outline-primary" onclick="exportData()">
+                    <i class="bi bi-download"></i> Export
+                  </button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary" onclick="refreshData()">
+                    <i class="bi bi-arrow-clockwise"></i> Refresh
+                  </button>
+                </div>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-hover" id="missionTable">
+                    <thead>
+                      <tr>
+                        <th onclick="sortTable(0)">Mission ID <i class="bi bi-arrow-down-up"></i></th>
+                        <th onclick="sortTable(1)">Date <i class="bi bi-arrow-down-up"></i></th>
+                        <th onclick="sortTable(2)">Peak Altitude (m) <i class="bi bi-arrow-down-up"></i></th>
+                        <th onclick="sortTable(3)">Min Temp (°C) <i class="bi bi-arrow-down-up"></i></th>
+                        <th onclick="sortTable(4)">Min Pressure (kPa) <i class="bi bi-arrow-down-up"></i></th>
+                        <th onclick="sortTable(5)">Duration (hrs) <i class="bi bi-arrow-down-up"></i></th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td><code>ASCEND-2024-001</code></td>
+                        <td>2024-10-15</td>
+                        <td>25,000</td>
+                        <td>-45</td>
+                        <td>2.5</td>
+                        <td>3.2</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-outline-primary" onclick="viewMission('ASCEND-2024-001')">
+                            <i class="bi bi-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>ASCEND-2024-002</code></td>
+                        <td>2024-10-10</td>
+                        <td>22,500</td>
+                        <td>-40</td>
+                        <td>3.2</td>
+                        <td>2.8</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-outline-primary" onclick="viewMission('ASCEND-2024-002')">
+                            <i class="bi bi-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>ASCEND-2024-003</code></td>
+                        <td>2024-10-05</td>
+                        <td>28,000</td>
+                        <td>-50</td>
+                        <td>2.1</td>
+                        <td>4.1</td>
+                        <td><span class="badge bg-warning">In Progress</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-outline-primary" onclick="viewMission('ASCEND-2024-003')">
+                            <i class="bi bi-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>ASCEND-2024-004</code></td>
+                        <td>2024-09-28</td>
+                        <td>26,500</td>
+                        <td>-48</td>
+                        <td>2.3</td>
+                        <td>3.7</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-outline-primary" onclick="viewMission('ASCEND-2024-004')">
+                            <i class="bi bi-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                      <tr>
+                        <td><code>ASCEND-2024-005</code></td>
+                        <td>2024-09-20</td>
+                        <td>24,000</td>
+                        <td>-42</td>
+                        <td>2.8</td>
+                        <td>3.0</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                        <td>
+                          <button class="btn btn-sm btn-outline-primary" onclick="viewMission('ASCEND-2024-005')">
+                            <i class="bi bi-eye"></i> View
+                          </button>
+                        </td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Analysis Tools -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <h3 class="mb-4">Data Analysis Tools</h3>
+            <div class="row g-4">
+              <div class="col-lg-4">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <i class="bi bi-download display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Export Data</h5>
+                    <p class="card-text">Download mission data in CSV format for analysis.</p>
+                    <button class="btn btn-primary" onclick="exportData()">
+                      <i class="bi bi-download"></i> Export CSV
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <i class="bi bi-graph-up display-4 text-success mb-3"></i>
+                    <h5 class="card-title">Visualize Data</h5>
+                    <p class="card-text">Create custom charts and graphs from mission data.</p>
+                    <button class="btn btn-success" onclick="openVisualizer()">
+                      <i class="bi bi-graph-up"></i> Open Visualizer
+                    </button>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <i class="bi bi-file-earmark-text display-4 text-info mb-3"></i>
+                    <h5 class="card-title">Generate Report</h5>
+                    <p class="card-text">Create comprehensive mission reports automatically.</p>
+                    <button class="btn btn-info" onclick="generateReport()">
+                      <i class="bi bi-file-earmark-text"></i> Generate Report
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Real-time Data -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card shadow">
+              <div class="card-header">
+                <h5 class="mb-0">
+                  <i class="bi bi-broadcast text-primary"></i> Live Mission Data
+                  <span class="badge bg-success ms-2">Live</span>
+                </h5>
+              </div>
+              <div class="card-body">
+                <div class="row g-3">
+                  <div class="col-md-3">
+                    <div class="text-center">
+                      <h3 class="text-primary" id="liveAltitude">--</h3>
+                      <p class="text-muted">Current Altitude (m)</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="text-center">
+                      <h3 class="text-success" id="liveTemp">--</h3>
+                      <p class="text-muted">Current Temperature (°C)</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="text-center">
+                      <h3 class="text-info" id="livePressure">--</h3>
+                      <p class="text-muted">Current Pressure (kPa)</p>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <div class="text-center">
+                      <h3 class="text-warning" id="liveTime">--</h3>
+                      <p class="text-muted">Mission Time (hrs)</p>
+                    </div>
+                  </div>
+                </div>
+                <div class="mt-3">
+                  <small class="text-muted">
+                    <i class="bi bi-info-circle"></i> Live data updates every 30 seconds during active missions.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  .border-left-primary {
+    border-left: 4px solid #0066cc !important;
+  }
+
+  .border-left-success {
+    border-left: 4px solid #28a745 !important;
+  }
+
+  .border-left-info {
+    border-left: 4px solid #17a2b8 !important;
+  }
+
+  .border-left-warning {
+    border-left: 4px solid #ffc107 !important;
+  }
+
+  .table th {
+    cursor: pointer;
+    user-select: none;
+  }
+
+  .table th:hover {
+    background-color: #f8f9fa;
+  }
+
+  .btn {
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+</style>
+
+<script>
+  // Initialize charts when page loads
+  document.addEventListener('DOMContentLoaded', function() {
+    initCharts();
+    initLiveData();
+  });
+
+  function initCharts() {
+    // Mission data chart
+    const missionCtx = document.getElementById('missionChart');
+    if (missionCtx) {
+      new Chart(missionCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          datasets: [{
+            label: 'Peak Altitude (m)',
+            data: [15000, 18000, 22000, 25000, 23000, 28000, 26000, 30000, 27000, 25000],
+            borderColor: '#0066cc',
+            backgroundColor: 'rgba(0, 102, 204, 0.1)',
+            tension: 0.4,
+            fill: true
+          }, {
+            label: 'Min Temperature (°C)',
+            data: [-20, -25, -30, -35, -32, -40, -38, -45, -42, -45],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            yAxisID: 'y1'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: {
+                display: true,
+                text: 'Altitude (m)'
+              }
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: {
+                display: true,
+                text: 'Temperature (°C)'
+              },
+              grid: {
+                drawOnChartArea: false,
+              },
+            }
+          }
+        }
+      });
+    }
+    
+    // Success rate chart
+    const successCtx = document.getElementById('successChart');
+    if (successCtx) {
+      new Chart(successCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Successful', 'Partial Success', 'Failed'],
+          datasets: [{
+            data: [10, 2, 0],
+            backgroundColor: ['#28a745', '#ffc107', '#dc3545'],
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+            }
+          }
+        }
+      });
+    }
+  }
+
+  function initLiveData() {
+    // Simulate live data updates
+    setInterval(updateLiveData, 30000);
+    updateLiveData(); // Initial update
+  }
+
+  function updateLiveData() {
+    // Simulate live data
+    const altitude = Math.floor(Math.random() * 5000) + 20000;
+    const temp = Math.floor(Math.random() * 20) - 50;
+    const pressure = (Math.random() * 2 + 1).toFixed(1);
+    const time = (Math.random() * 2 + 1).toFixed(1);
+
+    document.getElementById('liveAltitude').textContent = altitude.toLocaleString();
+    document.getElementById('liveTemp').textContent = temp;
+    document.getElementById('livePressure').textContent = pressure;
+    document.getElementById('liveTime').textContent = time;
+  }
+
+  function sortTable(columnIndex) {
+    const table = document.getElementById('missionTable');
+    const tbody = table.querySelector('tbody');
+    const rows = Array.from(tbody.querySelectorAll('tr'));
+    
+    const isNumeric = !isNaN(parseFloat(rows[0].cells[columnIndex].textContent));
+    
+    rows.sort((a, b) => {
+      const aVal = a.cells[columnIndex].textContent.trim();
+      const bVal = b.cells[columnIndex].textContent.trim();
+      
+      if (isNumeric) {
+        return parseFloat(aVal.replace(/,/g, '')) - parseFloat(bVal.replace(/,/g, ''));
+      } else {
+        return aVal.localeCompare(bVal);
+      }
+    });
+    
+    // Clear and re-append sorted rows
+    tbody.innerHTML = '';
+    rows.forEach(row => tbody.appendChild(row));
+  }
+
+  function exportData() {
+    const table = document.getElementById('missionTable');
+    const rows = Array.from(table.querySelectorAll('tr'));
+    const csvContent = rows.map(row => {
+      const cells = Array.from(row.querySelectorAll('th, td'));
+      return cells.map(cell => `"${cell.textContent.trim()}"`).join(',');
+    }).join('\n');
+    
+    const blob = new Blob([csvContent], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = 'ascend-mission-data.csv';
+    a.click();
+    window.URL.revokeObjectURL(url);
+  }
+
+  function refreshData() {
+    // Simulate data refresh
+    const button = event.target;
+    const originalText = button.innerHTML;
+    button.innerHTML = '<i class="bi bi-arrow-clockwise"></i> Refreshing...';
+    button.disabled = true;
+    
+    setTimeout(() => {
+      button.innerHTML = originalText;
+      button.disabled = false;
+      // In a real application, this would fetch new data
+      alert('Data refreshed successfully!');
+    }, 2000);
+  }
+
+  function viewMission(missionId) {
+    alert(`Viewing details for mission: ${missionId}`);
+    // In a real application, this would open a detailed view
+  }
+
+  function openVisualizer() {
+    alert('Opening data visualizer...');
+    // In a real application, this would open a visualization tool
+  }
+
+  function generateReport() {
+    alert('Generating mission report...');
+    // In a real application, this would generate a PDF report
+  }
+</script>

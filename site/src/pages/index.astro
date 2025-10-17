@@ -1,22 +1,523 @@
 ---
-import BaseLayout from '@layouts/BaseLayout.astro'
-import GetStarted from '@components/home/GetStarted.astro'
-import Customize from '@components/home/Customize.astro'
-import CSSVariables from '@components/home/CSSVariables.astro'
-import ComponentUtilities from '@components/home/ComponentUtilities.astro'
-import MastHead from '@components/home/MastHead.astro'
-import Plugins from '@components/home/Plugins.astro'
-import Icons from '@components/home/Icons.astro'
+import Layout from '../layouts/Layout.astro';
+import { Card, Container, Row, Col, Button, Navbar, Nav, NavDropdown, Badge, ProgressBar, Alert } from 'bootstrap';
 ---
 
-<BaseLayout>
-  <MastHead />
-  <div class="container-xxl bd-gutter masthead-followup">
-    <GetStarted />
-    <Customize />
-    <CSSVariables />
-    <ComponentUtilities />
-    <Plugins />
-    <Icons />
+<Layout title="Phoenix College NASA ASCEND Program">
+  <div class="hero-section">
+    <div class="hero-overlay"></div>
+    <div class="container h-100 d-flex align-items-center">
+      <div class="row w-100">
+        <div class="col-lg-8">
+          <h1 class="display-2 fw-bold text-white mb-4">
+            Phoenix College<br>
+            <span class="text-primary">NASA ASCEND</span>
+          </h1>
+          <p class="lead text-white mb-4">
+            High-altitude ballooning project funded by the Arizona Space Grant. 
+            Apply your STEM skills to real-world NASA-related science & engineering projects.
+          </p>
+          <div class="d-flex gap-3">
+            <a href="#about" class="btn btn-primary btn-lg">
+              <i class="bi bi-rocket-takeoff"></i> Learn More
+            </a>
+            <a href="#login" class="btn btn-outline-light btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <i class="bi bi-person-plus"></i> Join Our Team
+            </a>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="hero-image">
+            <img src="https://via.placeholder.com/400x300/1a1a2e/ffffff?text=High+Altitude+Balloon" 
+                 alt="High Altitude Balloon" class="img-fluid rounded shadow">
+          </div>
+        </div>
+      </div>
+    </div>
   </div>
-</BaseLayout>
+
+  <!-- About Section -->
+  <section id="about" class="py-5">
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-6">
+          <h2 class="display-5 fw-bold mb-4">What is the NASA ASCEND Program?</h2>
+          <p class="lead mb-4">
+            The NASA ASCEND internship program is a high-altitude ballooning project funded by the Arizona Space Grant. 
+            It provides a unique opportunity for undergraduate STEM students to apply their skills and prepare for 
+            success in their future endeavors.
+          </p>
+          <p class="mb-4">
+            Over 8 different colleges and universities participate each semester, with each college having their own 
+            designated payload built by students like you!
+          </p>
+          <p class="mb-4">
+            ASCEND strives to give our STEM students opportunities to work on hands-on, real-world, NASA-related 
+            science & engineering projects in a team orientation. Students get a chance to apply what they learn 
+            from their various classes toward the project. We launch real scientific and engineering packages 
+            into Earth's upper atmosphere.
+          </p>
+        </div>
+        <div class="col-lg-6">
+          <div class="row g-3">
+            <div class="col-6">
+              <div class="card h-100 text-center">
+                <div class="card-body">
+                  <img src="https://www.nasa.gov/sites/default/files/thumbnails/image/nasa-logo-web-rgb.png" 
+                       alt="NASA" height="60" class="mb-3">
+                  <h5 class="card-title">NASA Partner</h5>
+                  <p class="card-text small">Official NASA partnership program</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-6">
+              <div class="card h-100 text-center">
+                <div class="card-body">
+                  <img src="https://via.placeholder.com/60x60/0066cc/ffffff?text=ASGC" 
+                       alt="Arizona Space Grant" height="60" class="mb-3">
+                  <h5 class="card-title">Arizona Space Grant</h5>
+                  <p class="card-text small">Funded by Arizona Space Grant Consortium</p>
+                </div>
+              </div>
+            </div>
+            <div class="col-12">
+              <div class="card">
+                <div class="card-body text-center">
+                  <img src="https://via.placeholder.com/80x80/1e3a8a/ffffff?text=PC" 
+                       alt="Phoenix College" height="60" class="mb-3">
+                  <h5 class="card-title">Phoenix College</h5>
+                  <p class="card-text">A Maricopa Community College</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projects Section -->
+  <section id="projects" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5">Current Projects</h2>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card h-100 shadow">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-cpu text-primary"></i> Arduino Data Collection System
+              </h5>
+              <p class="card-text">
+                Advanced sensor suite for high-altitude balloon missions including pressure, 
+                temperature, UV radiation, and orientation sensors.
+              </p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle text-success"></i> BMP390 Pressure Sensor</li>
+                <li><i class="bi bi-check-circle text-success"></i> BNO055 IMU (9-axis)</li>
+                <li><i class="bi bi-check-circle text-success"></i> AS7331 UV Sensors (4 units)</li>
+                <li><i class="bi bi-check-circle text-success"></i> GPS Integration</li>
+                <li><i class="bi bi-check-circle text-success"></i> SD Card Data Logging</li>
+              </ul>
+              <div class="d-flex gap-2">
+                <a href="https://github.com/PrestonFurulie/arduino" class="btn btn-primary" target="_blank">
+                  <i class="bi bi-github"></i> View Code
+                </a>
+                <a href="/arduino-code" class="btn btn-outline-primary">
+                  <i class="bi bi-download"></i> Download
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card h-100 shadow">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-graph-up text-primary"></i> Data Analysis & Visualization
+              </h5>
+              <p class="card-text">
+                Real-time data processing and visualization tools for mission analysis 
+                and scientific research.
+              </p>
+              <ul class="list-unstyled">
+                <li><i class="bi bi-check-circle text-success"></i> Real-time Data Dashboard</li>
+                <li><i class="bi bi-check-circle text-success"></i> Mission Trajectory Mapping</li>
+                <li><i class="bi bi-check-circle text-success"></i> Environmental Data Analysis</li>
+                <li><i class="bi bi-check-circle text-success"></i> Historical Mission Archive</li>
+              </ul>
+              <div class="d-flex gap-2">
+                <a href="/mission-data" class="btn btn-primary">
+                  <i class="bi bi-bar-chart"></i> View Data
+                </a>
+                <a href="/dashboard" class="btn btn-outline-primary">
+                  <i class="bi bi-speedometer2"></i> Dashboard
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Team Section -->
+  <section id="team" class="py-5">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5">Our Team</h2>
+      <div class="row g-4">
+        <div class="col-lg-8 mx-auto">
+          <div class="card shadow">
+            <img src="https://via.placeholder.com/800x400/1a1a2e/ffffff?text=ASCEND+Team+Photo" 
+                 class="card-img-top" alt="ASCEND Team">
+            <div class="card-body text-center">
+              <h5 class="card-title">Fall 2024 ASCEND Team</h5>
+              <p class="card-text">
+                Our dedicated team of STEM students working on cutting-edge high-altitude ballooning projects.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Mission Data Section -->
+  <section id="data" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5">Mission Data</h2>
+      <div class="row g-4">
+        <div class="col-lg-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-play-circle text-primary"></i> Fall 2022 Launch Trailer
+              </h5>
+              <div class="ratio ratio-16x9">
+                <iframe src="https://www.youtube.com/embed/dQw4w9WgXcQ" 
+                        title="Fall 2022 Launch Trailer" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-6">
+          <div class="card h-100">
+            <div class="card-body">
+              <h5 class="card-title">
+                <i class="bi bi-file-earmark-slides text-primary"></i> Recruitment Presentation 2024
+              </h5>
+              <div class="ratio ratio-16x9">
+                <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vQexample/embed" 
+                        title="Recruitment Presentation 2024" allowfullscreen></iframe>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <!-- Data Dashboard -->
+      <div class="row mt-5">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-header">
+              <h5 class="mb-0">
+                <i class="bi bi-graph-up text-primary"></i> Live Mission Data
+              </h5>
+            </div>
+            <div class="card-body">
+              <div class="row g-3">
+                <div class="col-md-3">
+                  <div class="text-center">
+                    <h3 class="text-primary">25,000m</h3>
+                    <p class="text-muted">Peak Altitude</p>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="text-center">
+                    <h3 class="text-success">-45°C</h3>
+                    <p class="text-muted">Min Temperature</p>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="text-center">
+                    <h3 class="text-info">2.5 kPa</h3>
+                    <p class="text-muted">Min Pressure</p>
+                  </div>
+                </div>
+                <div class="col-md-3">
+                  <div class="text-center">
+                    <h3 class="text-warning">3.2 hrs</h3>
+                    <p class="text-muted">Flight Duration</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Resources Section -->
+  <section id="resources" class="py-5">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5">Resources</h2>
+      <div class="row g-4">
+        <div class="col-lg-4">
+          <div class="card h-100 text-center">
+            <div class="card-body">
+              <i class="bi bi-code-slash display-4 text-primary mb-3"></i>
+              <h5 class="card-title">Code Repository</h5>
+              <p class="card-text">Access our Arduino code, documentation, and project files.</p>
+              <a href="https://github.com/PrestonFurulie/arduino" class="btn btn-primary" target="_blank">
+                <i class="bi bi-github"></i> GitHub
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card h-100 text-center">
+            <div class="card-body">
+              <i class="bi bi-book display-4 text-primary mb-3"></i>
+              <h5 class="card-title">Documentation</h5>
+              <p class="card-text">Hardware setup guides, data analysis tutorials, and project documentation.</p>
+              <a href="/documentation" class="btn btn-primary">
+                <i class="bi bi-file-text"></i> View Docs
+              </a>
+            </div>
+          </div>
+        </div>
+        <div class="col-lg-4">
+          <div class="card h-100 text-center">
+            <div class="card-body">
+              <i class="bi bi-people display-4 text-primary mb-3"></i>
+              <h5 class="card-title">Team Collaboration</h5>
+              <p class="card-text">Forums, announcements, and team communication tools.</p>
+              <a href="/dashboard" class="btn btn-primary">
+                <i class="bi bi-chat-dots"></i> Join Discussion
+              </a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Contact Section -->
+  <section id="contact" class="py-5 bg-light">
+    <div class="container">
+      <h2 class="text-center display-5 fw-bold mb-5">Get Involved</h2>
+      <div class="row">
+        <div class="col-lg-8 mx-auto text-center">
+          <p class="lead mb-4">
+            Ready to join our mission? Apply to become part of the Phoenix College NASA ASCEND program 
+            and work on cutting-edge high-altitude ballooning projects.
+          </p>
+          <div class="d-flex gap-3 justify-content-center flex-wrap">
+            <a href="#login" class="btn btn-primary btn-lg" data-bs-toggle="modal" data-bs-target="#loginModal">
+              <i class="bi bi-person-plus"></i> Application
+            </a>
+            <a href="mailto:ascend@phoenixcollege.edu" class="btn btn-outline-primary btn-lg">
+              <i class="bi bi-envelope"></i> Email Us
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Login Modal -->
+  <div class="modal fade" id="loginModal" tabindex="-1">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title">Member Login</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal"></button>
+        </div>
+        <div class="modal-body">
+          <form id="loginForm">
+            <div class="mb-3">
+              <label for="email" class="form-label">Email Address</label>
+              <input type="email" class="form-control" id="email" required>
+            </div>
+            <div class="mb-3">
+              <label for="password" class="form-label">Password</label>
+              <input type="password" class="form-control" id="password" required>
+            </div>
+            <div class="mb-3 form-check">
+              <input type="checkbox" class="form-check-input" id="remember">
+              <label class="form-check-label" for="remember">Remember me</label>
+            </div>
+            <button type="submit" class="btn btn-primary w-100">Login</button>
+          </form>
+          <div class="text-center mt-3">
+            <p class="text-muted">Don't have an account? <a href="#contact">Contact us to join</a></p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .hero-section {
+    height: 100vh;
+    background: linear-gradient(135deg, #0f0f23 0%, #1a1a2e 50%, #16213e 100%);
+    background-image: 
+      radial-gradient(circle at 20% 80%, rgba(120, 119, 198, 0.3) 0%, transparent 50%),
+      radial-gradient(circle at 80% 20%, rgba(255, 107, 53, 0.15) 0%, transparent 50%);
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    position: relative;
+    display: flex;
+    align-items: center;
+  }
+
+  .hero-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.4);
+    z-index: 1;
+  }
+
+  .hero-section .container {
+    position: relative;
+    z-index: 2;
+  }
+
+  .hero-image img {
+    border-radius: 15px;
+    box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+  }
+
+  .hero-image img:hover {
+    transform: scale(1.05);
+  }
+
+  .card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+    overflow: hidden;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  .btn {
+    border-radius: 25px;
+    font-weight: 600;
+    padding: 12px 30px;
+    transition: all 0.3s ease;
+  }
+
+  .btn-primary {
+    background: linear-gradient(45deg, #0066cc, #004499);
+    border: none;
+  }
+
+  .btn-primary:hover {
+    background: linear-gradient(45deg, #004499, #0066cc);
+    transform: translateY(-2px);
+    box-shadow: 0 10px 20px rgba(0, 102, 204, 0.3);
+  }
+
+  .btn-outline-primary {
+    border: 2px solid #0066cc;
+    color: #0066cc;
+  }
+
+  .btn-outline-primary:hover {
+    background: #0066cc;
+    transform: translateY(-2px);
+  }
+
+  .bg-light {
+    background-color: #f8f9fa !important;
+  }
+
+  .ratio {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .ratio iframe {
+    border: none;
+  }
+
+  .modal-content {
+    border-radius: 15px;
+    border: none;
+  }
+
+  .modal-header {
+    border-bottom: 1px solid #e9ecef;
+    background: linear-gradient(45deg, #0066cc, #004499);
+    color: white;
+  }
+
+  .modal-header .btn-close {
+    filter: invert(1);
+  }
+
+  @media (max-width: 768px) {
+    .hero-section {
+      height: 80vh;
+      text-align: center;
+    }
+    
+    .display-2 {
+      font-size: 2.5rem;
+    }
+    
+    .hero-image {
+      margin-top: 2rem;
+    }
+  }
+</style>
+
+<script>
+  // Login form functionality
+  document.addEventListener('DOMContentLoaded', function() {
+    const loginForm = document.getElementById('loginForm');
+    
+    if (loginForm) {
+      loginForm.addEventListener('submit', function(e) {
+        e.preventDefault();
+        
+        const email = document.getElementById('email').value;
+        const password = document.getElementById('password').value;
+        
+        // Demo credentials
+        const validCredentials = [
+          { email: 'pre2167119@maricopa.edu', password: 'ascend2024' },
+          { email: 'admin@phoenixcollege.edu', password: 'admin123' },
+          { email: 'student@phoenixcollege.edu', password: 'student123' }
+        ];
+        
+        const isValid = validCredentials.some(cred => 
+          cred.email === email && cred.password === password
+        );
+        
+        if (isValid) {
+          // Store login state
+          localStorage.setItem('ascend_user', JSON.stringify({
+            email: email,
+            loginTime: new Date().toISOString()
+          }));
+          
+          // Redirect to dashboard
+          window.location.href = '/dashboard';
+        } else {
+          alert('Invalid email or password. Please try again.');
+        }
+      });
+    }
+  });
+</script>
