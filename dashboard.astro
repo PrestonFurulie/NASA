@@ -1,0 +1,671 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Card, Container, Row, Col, Button, Navbar, Nav, Badge, ProgressBar, Alert, Table } from 'bootstrap';
+---
+
+<Layout title="ASCEND Member Dashboard">
+  <div class="dashboard-container">
+    <!-- Navigation -->
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
+      <div class="container-fluid">
+        <a class="navbar-brand d-flex align-items-center" href="/">
+          <img src="https://www.nasa.gov/sites/default/files/thumbnails/image/nasa-logo-web-rgb.png" alt="NASA" height="30" class="me-2">
+          <span class="fw-bold">PC NASA ASCEND</span>
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+          <ul class="navbar-nav ms-auto">
+            <li class="nav-item">
+              <a class="nav-link active" href="#overview">Overview</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#projects">Projects</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#data">Mission Data</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#resources">Resources</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link" href="#team">Team</a>
+            </li>
+            <li class="nav-item">
+              <button class="btn btn-outline-light ms-2" onclick="logout()">
+                <i class="bi bi-box-arrow-right"></i> Logout
+              </button>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </nav>
+
+    <!-- Dashboard Content -->
+    <div class="container-fluid">
+      <div class="row">
+        <!-- Sidebar -->
+        <nav class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+          <div class="position-sticky pt-3">
+            <ul class="nav flex-column">
+              <li class="nav-item">
+                <a class="nav-link active" href="#overview">
+                  <i class="bi bi-speedometer2"></i> Overview
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#projects">
+                  <i class="bi bi-rocket-takeoff"></i> Projects
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#data">
+                  <i class="bi bi-graph-up"></i> Mission Data
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#resources">
+                  <i class="bi bi-folder"></i> Resources
+                </a>
+              </li>
+              <li class="nav-item">
+                <a class="nav-link" href="#team">
+                  <i class="bi bi-people"></i> Team
+                </a>
+              </li>
+            </ul>
+          </div>
+        </nav>
+
+        <!-- Main content -->
+        <main class="col-md-9 ms-sm-auto col-lg-10 px-md-4">
+          <!-- Overview Section -->
+          <section id="overview" class="py-4">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Dashboard Overview</h1>
+              <div class="btn-toolbar mb-2 mb-md-0">
+                <div class="btn-group me-2">
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Export</button>
+                  <button type="button" class="btn btn-sm btn-outline-secondary">Share</button>
+                </div>
+                <button type="button" class="btn btn-sm btn-primary">
+                  <i class="bi bi-plus"></i> New Project
+                </button>
+              </div>
+            </div>
+
+            <!-- Stats Cards -->
+            <div class="row mb-4">
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-primary shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+                          Active Projects
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">3</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="bi bi-rocket-takeoff fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-success shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-success text-uppercase mb-1">
+                          Missions Completed
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">12</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="bi bi-check-circle fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-info shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
+                          Data Points Collected
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">45,678</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="bi bi-database fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-xl-3 col-md-6 mb-4">
+                <div class="card border-left-warning shadow h-100 py-2">
+                  <div class="card-body">
+                    <div class="row no-gutters align-items-center">
+                      <div class="col mr-2">
+                        <div class="text-xs font-weight-bold text-warning text-uppercase mb-1">
+                          Team Members
+                        </div>
+                        <div class="h5 mb-0 font-weight-bold text-gray-800">8</div>
+                      </div>
+                      <div class="col-auto">
+                        <i class="bi bi-people fa-2x text-gray-300"></i>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!-- Charts Row -->
+            <div class="row">
+              <div class="col-lg-8">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Mission Data Trends</h6>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="missionChart" width="400" height="200"></canvas>
+                  </div>
+                </div>
+              </div>
+              <div class="col-lg-4">
+                <div class="card shadow mb-4">
+                  <div class="card-header py-3">
+                    <h6 class="m-0 font-weight-bold text-primary">Project Status</h6>
+                  </div>
+                  <div class="card-body">
+                    <canvas id="statusChart" width="400" height="200"></canvas>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Projects Section -->
+          <section id="projects" class="py-4" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Active Projects</h1>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-6 mb-4">
+                <div class="card shadow">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-cpu text-primary"></i> Arduino Data Collection System
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">Advanced sensor suite for high-altitude balloon missions.</p>
+                    <div class="progress mb-3">
+                      <div class="progress-bar" role="progressbar" style="width: 85%">85% Complete</div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <small class="text-muted">Last updated: 2 days ago</small>
+                      <a href="https://github.com/PrestonFurulie/arduino" class="btn btn-sm btn-primary" target="_blank">
+                        <i class="bi bi-github"></i> View Code
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-6 mb-4">
+                <div class="card shadow">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-graph-up text-success"></i> Data Visualization Dashboard
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <p class="card-text">Real-time data processing and visualization tools.</p>
+                    <div class="progress mb-3">
+                      <div class="progress-bar bg-success" role="progressbar" style="width: 60%">60% Complete</div>
+                    </div>
+                    <div class="d-flex justify-content-between">
+                      <small class="text-muted">Last updated: 1 week ago</small>
+                      <a href="#data" class="btn btn-sm btn-success">
+                        <i class="bi bi-bar-chart"></i> View Dashboard
+                      </a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Mission Data Section -->
+          <section id="data" class="py-4" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Mission Data</h1>
+              <div class="btn-toolbar mb-2 mb-md-0">
+                <button type="button" class="btn btn-sm btn-outline-secondary">
+                  <i class="bi bi-download"></i> Export Data
+                </button>
+              </div>
+            </div>
+
+            <div class="card shadow mb-4">
+              <div class="card-header">
+                <h6 class="m-0 font-weight-bold text-primary">Recent Mission Data</h6>
+              </div>
+              <div class="card-body">
+                <div class="table-responsive">
+                  <table class="table table-bordered" id="dataTable">
+                    <thead>
+                      <tr>
+                        <th>Mission ID</th>
+                        <th>Date</th>
+                        <th>Altitude (m)</th>
+                        <th>Temperature (°C)</th>
+                        <th>Pressure (kPa)</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>ASCEND-2024-001</td>
+                        <td>2024-10-15</td>
+                        <td>25,000</td>
+                        <td>-45</td>
+                        <td>2.5</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <td>ASCEND-2024-002</td>
+                        <td>2024-10-10</td>
+                        <td>22,500</td>
+                        <td>-40</td>
+                        <td>3.2</td>
+                        <td><span class="badge bg-success">Completed</span></td>
+                      </tr>
+                      <tr>
+                        <td>ASCEND-2024-003</td>
+                        <td>2024-10-05</td>
+                        <td>28,000</td>
+                        <td>-50</td>
+                        <td>2.1</td>
+                        <td><span class="badge bg-warning">In Progress</span></td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Resources Section -->
+          <section id="resources" class="py-4" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Resources</h1>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-4 mb-4">
+                <div class="card shadow">
+                  <div class="card-body text-center">
+                    <i class="bi bi-file-earmark-code display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Arduino Code</h5>
+                    <p class="card-text">Complete source code and documentation for our data collection system.</p>
+                    <a href="https://github.com/PrestonFurulie/arduino" class="btn btn-primary" target="_blank">
+                      <i class="bi bi-github"></i> View Repository
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 mb-4">
+                <div class="card shadow">
+                  <div class="card-body text-center">
+                    <i class="bi bi-book display-4 text-success mb-3"></i>
+                    <h5 class="card-title">Documentation</h5>
+                    <p class="card-text">Hardware setup guides, data analysis tutorials, and project documentation.</p>
+                    <a href="/documentation" class="btn btn-success">
+                      <i class="bi bi-download"></i> Download PDF
+                    </a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4 mb-4">
+                <div class="card shadow">
+                  <div class="card-body text-center">
+                    <i class="bi bi-chat-dots display-4 text-info mb-3"></i>
+                    <h5 class="card-title">Team Forum</h5>
+                    <p class="card-text">Collaborate with team members and discuss project updates.</p>
+                    <a href="#team" class="btn btn-info">
+                      <i class="bi bi-chat"></i> Open Forum
+                    </a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <!-- Team Section -->
+          <section id="team" class="py-4" style="display: none;">
+            <div class="d-flex justify-content-between flex-wrap flex-md-nowrap align-items-center pt-3 pb-2 mb-3 border-bottom">
+              <h1 class="h2">Team Members</h1>
+            </div>
+
+            <div class="row">
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card shadow text-center">
+                  <div class="card-body">
+                    <img src="https://via.placeholder.com/100x100/0066cc/ffffff?text=PF" class="rounded-circle mb-3" alt="Preston Furulie">
+                    <h5 class="card-title">Preston Furulie</h5>
+                    <p class="card-text text-muted">Project Lead</p>
+                    <p class="card-text small">Arduino Development, Hardware Integration</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card shadow text-center">
+                  <div class="card-body">
+                    <img src="https://via.placeholder.com/100x100/28a745/ffffff?text=AT" class="rounded-circle mb-3" alt="Angela Trainor">
+                    <h5 class="card-title">Angela Trainor</h5>
+                    <p class="card-text text-muted">Software Engineer</p>
+                    <p class="card-text small">Data Analysis, Visualization</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card shadow text-center">
+                  <div class="card-body">
+                    <img src="https://via.placeholder.com/100x100/dc3545/ffffff?text=MM" class="rounded-circle mb-3" alt="Marquis Muza">
+                    <h5 class="card-title">Marquis Muza</h5>
+                    <p class="card-text text-muted">Hardware Engineer</p>
+                    <p class="card-text small">Sensor Integration, PCB Design</p>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-3 col-md-6 mb-4">
+                <div class="card shadow text-center">
+                  <div class="card-body">
+                    <img src="https://via.placeholder.com/100x100/ffc107/ffffff?text=EP" class="rounded-circle mb-3" alt="Ethan Pierson">
+                    <h5 class="card-title">Ethan Pierson</h5>
+                    <p class="card-text text-muted">Data Scientist</p>
+                    <p class="card-text small">Mission Analysis, Statistics</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </main>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .dashboard-container {
+    min-height: 100vh;
+    background-color: #f8f9fa;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 60px;
+    bottom: 0;
+    left: 0;
+    z-index: 100;
+    padding: 0;
+    box-shadow: inset -1px 0 0 rgba(0, 0, 0, .1);
+    background-color: #f8f9fa;
+    border-right: 1px solid #dee2e6;
+  }
+
+  .sidebar .nav-link {
+    color: #333;
+    padding: 1rem;
+    border-bottom: 1px solid #dee2e6;
+    transition: all 0.3s ease;
+  }
+
+  .sidebar .nav-link:hover {
+    background-color: #e9ecef;
+    color: #0066cc;
+  }
+
+  .sidebar .nav-link.active {
+    background-color: #0066cc;
+    color: white;
+    border-left: 4px solid #004499;
+  }
+
+  .sidebar .nav-link i {
+    margin-right: 0.5rem;
+    width: 20px;
+    text-align: center;
+  }
+
+  main {
+    margin-left: 250px;
+    padding-top: 2rem;
+  }
+
+  .border-left-primary {
+    border-left: 0.25rem solid #0066cc !important;
+  }
+
+  .border-left-success {
+    border-left: 0.25rem solid #28a745 !important;
+  }
+
+  .border-left-info {
+    border-left: 0.25rem solid #17a2b8 !important;
+  }
+
+  .border-left-warning {
+    border-left: 0.25rem solid #ffc107 !important;
+  }
+
+  .card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
+  .progress {
+    height: 0.5rem;
+    border-radius: 0.25rem;
+  }
+
+  .progress-bar {
+    background: linear-gradient(45deg, #0066cc, #004499);
+  }
+
+  .table th {
+    background-color: #f8f9fa;
+    border-top: none;
+    font-weight: 600;
+    color: #495057;
+  }
+
+  .table td {
+    vertical-align: middle;
+  }
+
+  .badge {
+    font-size: 0.75rem;
+    padding: 0.375rem 0.75rem;
+  }
+
+  @media (max-width: 768px) {
+    .sidebar {
+      position: static;
+      height: auto;
+      margin-bottom: 1rem;
+    }
+    
+    main {
+      margin-left: 0;
+    }
+  }
+</style>
+
+<script>
+  // Check if user is logged in
+  document.addEventListener('DOMContentLoaded', function() {
+    const user = localStorage.getItem('ascend_user');
+    if (!user) {
+      window.location.href = '/';
+      return;
+    }
+
+    // Initialize dashboard
+    initDashboard();
+    initCharts();
+    initNavigation();
+  });
+
+  function initDashboard() {
+    // Set active section
+    showSection('overview');
+  }
+
+  function initCharts() {
+    // Mission data chart
+    const missionCtx = document.getElementById('missionChart');
+    if (missionCtx) {
+      new Chart(missionCtx, {
+        type: 'line',
+        data: {
+          labels: ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct'],
+          datasets: [{
+            label: 'Altitude (m)',
+            data: [15000, 18000, 22000, 25000, 23000, 28000, 26000, 30000, 27000, 25000],
+            borderColor: '#0066cc',
+            backgroundColor: 'rgba(0, 102, 204, 0.1)',
+            tension: 0.4,
+            fill: true
+          }, {
+            label: 'Temperature (°C)',
+            data: [-20, -25, -30, -35, -32, -40, -38, -45, -42, -45],
+            borderColor: '#28a745',
+            backgroundColor: 'rgba(40, 167, 69, 0.1)',
+            tension: 0.4,
+            yAxisID: 'y1'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          scales: {
+            y: {
+              type: 'linear',
+              display: true,
+              position: 'left',
+              title: {
+                display: true,
+                text: 'Altitude (m)'
+              }
+            },
+            y1: {
+              type: 'linear',
+              display: true,
+              position: 'right',
+              title: {
+                display: true,
+                text: 'Temperature (°C)'
+              },
+              grid: {
+                drawOnChartArea: false,
+              },
+            }
+          }
+        }
+      });
+    }
+    
+    // Project status chart
+    const statusCtx = document.getElementById('statusChart');
+    if (statusCtx) {
+      new Chart(statusCtx, {
+        type: 'doughnut',
+        data: {
+          labels: ['Completed', 'In Progress', 'Planning'],
+          datasets: [{
+            data: [12, 3, 2],
+            backgroundColor: ['#28a745', '#ffc107', '#17a2b8'],
+            borderWidth: 2,
+            borderColor: '#fff'
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false,
+          plugins: {
+            legend: {
+              position: 'bottom',
+            }
+          }
+        }
+      });
+    }
+  }
+
+  function initNavigation() {
+    const navLinks = document.querySelectorAll('.sidebar .nav-link');
+    const sections = document.querySelectorAll('main section[id]');
+    
+    navLinks.forEach(link => {
+      link.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // Remove active class from all links
+        navLinks.forEach(l => l.classList.remove('active'));
+        
+        // Add active class to clicked link
+        this.classList.add('active');
+        
+        // Show corresponding section
+        const targetId = this.getAttribute('href').substring(1);
+        showSection(targetId);
+      });
+    });
+  }
+
+  function showSection(sectionId) {
+    const sections = document.querySelectorAll('main section[id]');
+    
+    sections.forEach(section => {
+      if (section.id === sectionId) {
+        section.style.display = 'block';
+        section.classList.add('active');
+      } else {
+        section.style.display = 'none';
+        section.classList.remove('active');
+      }
+    });
+  }
+
+  function logout() {
+    if (confirm('Are you sure you want to logout?')) {
+      localStorage.removeItem('ascend_user');
+      window.location.href = '/';
+    }
+  }
+</script>

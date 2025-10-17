@@ -1,0 +1,289 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Card, Container, Row, Col, Button, Nav, Tab, Badge, Alert } from 'bootstrap';
+---
+
+<Layout title="Arduino Code - ASCEND Project">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-lg-8 mx-auto">
+        <div class="text-center mb-5">
+          <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-cpu text-primary"></i> Arduino Data Collection System
+          </h1>
+          <p class="lead text-muted">
+            Complete source code and documentation for our high-altitude balloon data collection system
+          </p>
+        </div>
+
+        <!-- Code Versions -->
+        <div class="row mb-5">
+          <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow">
+              <div class="card-header bg-primary text-white">
+                <h5 class="mb-0">
+                  <i class="bi bi-satellite"></i> HailMaryV1c_GPS.ino
+                </h5>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <strong>GPS-Integrated Version</strong> - Complete sensor suite with GPS tracking for accurate UTC timestamps and coordinates.
+                </p>
+                <ul class="list-unstyled">
+                  <li><i class="bi bi-check-circle text-success"></i> BMP390 Pressure Sensor</li>
+                  <li><i class="bi bi-check-circle text-success"></i> BNO055 IMU (9-axis)</li>
+                  <li><i class="bi bi-check-circle text-success"></i> AS7331 UV Sensors (4 units)</li>
+                  <li><i class="bi bi-check-circle text-success"></i> GPS Module (NEO-6M)</li>
+                  <li><i class="bi bi-check-circle text-success"></i> SD Card Data Logging</li>
+                </ul>
+                <div class="d-flex gap-2">
+                  <a href="https://github.com/PrestonFurulie/arduino/blob/main/src/HailMaryV1c_GPS.ino" 
+                     class="btn btn-primary" target="_blank">
+                    <i class="bi bi-github"></i> View Code
+                  </a>
+                  <button class="btn btn-outline-primary" onclick="downloadCode('gps')">
+                    <i class="bi bi-download"></i> Download
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="col-md-6 mb-4">
+            <div class="card h-100 shadow">
+              <div class="card-header bg-success text-white">
+                <h5 class="mb-0">
+                  <i class="bi bi-cpu"></i> HailMaryV1c_NoGPS.ino
+                </h5>
+              </div>
+              <div class="card-body">
+                <p class="card-text">
+                  <strong>Clean Version</strong> - Simplified version without GPS for basic missions and testing.
+                </p>
+                <ul class="list-unstyled">
+                  <li><i class="bi bi-check-circle text-success"></i> BMP390 Pressure Sensor</li>
+                  <li><i class="bi bi-check-circle text-success"></i> BNO055 IMU (9-axis)</li>
+                  <li><i class="bi bi-check-circle text-success"></i> AS7331 UV Sensors (4 units)</li>
+                  <li><i class="bi bi-check-circle text-success"></i> SD Card Data Logging</li>
+                  <li><i class="bi bi-check-circle text-success"></i> Enhanced Documentation</li>
+                </ul>
+                <div class="d-flex gap-2">
+                  <a href="https://github.com/PrestonFurulie/arduino/blob/main/src/HailMaryV1c_NoGPS.ino" 
+                     class="btn btn-success" target="_blank">
+                    <i class="bi bi-github"></i> View Code
+                  </a>
+                  <button class="btn btn-outline-success" onclick="downloadCode('nogps')">
+                    <i class="bi bi-download"></i> Download
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Code Features -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <h3 class="mb-4">Key Features</h3>
+            <div class="row g-4">
+              <div class="col-md-4">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <i class="bi bi-shield-check display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Robust Error Handling</h5>
+                    <p class="card-text">Comprehensive error detection and recovery for mission-critical reliability.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <i class="bi bi-graph-up display-4 text-success mb-3"></i>
+                    <h5 class="card-title">Real-time Data Logging</h5>
+                    <p class="card-text">High-frequency data collection with SD card buffering for reliability.</p>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-4">
+                <div class="card text-center">
+                  <div class="card-body">
+                    <i class="bi bi-gear display-4 text-info mb-3"></i>
+                    <h5 class="card-title">Modular Design</h5>
+                    <p class="card-text">Easy to modify and extend for different mission requirements.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Hardware Requirements -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <h3 class="mb-4">Hardware Requirements</h3>
+            <div class="card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col-md-6">
+                    <h5>Core Components</h5>
+                    <ul class="list-unstyled">
+                      <li><i class="bi bi-check-circle text-success"></i> Arduino Mega 2560</li>
+                      <li><i class="bi bi-check-circle text-success"></i> Adafruit BMP390 (Pressure/Temperature)</li>
+                      <li><i class="bi bi-check-circle text-success"></i> Adafruit BNO055 (9-axis IMU)</li>
+                      <li><i class="bi bi-check-circle text-success"></i> SparkFun AS7331 x4 (UV Sensors)</li>
+                      <li><i class="bi bi-check-circle text-success"></i> SD Card Module</li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <h5>Optional Components</h5>
+                    <ul class="list-unstyled">
+                      <li><i class="bi bi-plus-circle text-info"></i> NEO-6M GPS Module (GPS version)</li>
+                      <li><i class="bi bi-plus-circle text-info"></i> 12V Battery Pack (18650 cells)</li>
+                      <li><i class="bi bi-plus-circle text-info"></i> Custom PCB (optional)</li>
+                      <li><i class="bi bi-plus-circle text-info"></i> Enclosure (weather protection)</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Installation Instructions -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <h3 class="mb-4">Installation Instructions</h3>
+            <div class="card">
+              <div class="card-body">
+                <h5>Required Libraries</h5>
+                <p>Install the following libraries through the Arduino IDE Library Manager:</p>
+                <div class="row">
+                  <div class="col-md-6">
+                    <ul class="list-unstyled">
+                      <li><code>Adafruit BMP3XX</code></li>
+                      <li><code>Adafruit BNO055</code></li>
+                      <li><code>Adafruit Unified Sensor</code></li>
+                      <li><code>SparkFun AS7331</code></li>
+                    </ul>
+                  </div>
+                  <div class="col-md-6">
+                    <ul class="list-unstyled">
+                      <li><code>TinyGPS++</code> (GPS version only)</li>
+                      <li><code>SD</code></li>
+                      <li><code>SPI</code></li>
+                      <li><code>Wire</code></li>
+                    </ul>
+                  </div>
+                </div>
+                
+                <h5 class="mt-4">Setup Steps</h5>
+                <ol>
+                  <li>Download the appropriate .ino file for your needs</li>
+                  <li>Open in Arduino IDE (version 1.8.0 or later)</li>
+                  <li>Install required libraries</li>
+                  <li>Connect hardware according to wiring diagrams</li>
+                  <li>Upload to Arduino Mega 2560</li>
+                  <li>Insert SD card and power on</li>
+                </ol>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Data Output -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <h3 class="mb-4">Data Output Format</h3>
+            <div class="card">
+              <div class="card-header">
+                <h5 class="mb-0">CSV Data Structure</h5>
+              </div>
+              <div class="card-body">
+                <h6>GPS Version:</h6>
+                <code>UTC_Date,UTC_Time,GPS_Fix,elapsed(ms),UV_values...,pressure,temp,altitude,gyro_X/Y/Z,accel_X/Y/Z</code>
+                
+                <h6 class="mt-3">No GPS Version:</h6>
+                <code>elapsed(ms),UV_values...,pressure,temp,altitude,gyro_X/Y/Z,accel_X/Y/Z</code>
+                
+                <div class="mt-3">
+                  <small class="text-muted">
+                    Data is automatically logged to <code>data.csv</code> on the SD card every 500ms.
+                  </small>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- GitHub Repository -->
+        <div class="row">
+          <div class="col-12">
+            <div class="card bg-light">
+              <div class="card-body text-center">
+                <h5 class="card-title">
+                  <i class="bi bi-github"></i> Complete Repository
+                </h5>
+                <p class="card-text">
+                  Access the full project repository with documentation, hardware guides, and data analysis tools.
+                </p>
+                <a href="https://github.com/PrestonFurulie/arduino" class="btn btn-primary btn-lg" target="_blank">
+                  <i class="bi bi-github"></i> View on GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 15px 35px rgba(0, 0, 0, 0.1);
+  }
+
+  .card-header {
+    border-radius: 15px 15px 0 0 !important;
+  }
+
+  code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  .btn {
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+</style>
+
+<script>
+  function downloadCode(version) {
+    const filename = version === 'gps' ? 'HailMaryV1c_GPS.ino' : 'HailMaryV1c_NoGPS.ino';
+    const url = `https://raw.githubusercontent.com/PrestonFurulie/arduino/main/src/${filename}`;
+    
+    // Create a temporary link to download the file
+    const link = document.createElement('a');
+    link.href = url;
+    link.download = filename;
+    link.target = '_blank';
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+  }
+</script>

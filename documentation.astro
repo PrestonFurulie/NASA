@@ -1,0 +1,700 @@
+---
+import Layout from '../layouts/Layout.astro';
+import { Card, Container, Row, Col, Button, Nav, Tab, Badge, Alert, Accordion } from 'bootstrap';
+---
+
+<Layout title="Documentation - ASCEND Project">
+  <div class="container py-5">
+    <div class="row">
+      <div class="col-12">
+        <div class="text-center mb-5">
+          <h1 class="display-4 fw-bold mb-3">
+            <i class="bi bi-book text-primary"></i> Project Documentation
+          </h1>
+          <p class="lead text-muted">
+            Complete guides and resources for the ASCEND high-altitude balloon project
+          </p>
+        </div>
+
+        <!-- Documentation Navigation -->
+        <div class="row mb-5">
+          <div class="col-12">
+            <div class="card">
+              <div class="card-body">
+                <ul class="nav nav-pills nav-fill" id="docTabs" role="tablist">
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link active" id="hardware-tab" data-bs-toggle="pill" data-bs-target="#hardware" type="button" role="tab">
+                      <i class="bi bi-cpu"></i> Hardware Setup
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="software-tab" data-bs-toggle="pill" data-bs-target="#software" type="button" role="tab">
+                      <i class="bi bi-code-slash"></i> Software Guide
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="analysis-tab" data-bs-toggle="pill" data-bs-target="#analysis" type="button" role="tab">
+                      <i class="bi bi-graph-up"></i> Data Analysis
+                    </button>
+                  </li>
+                  <li class="nav-item" role="presentation">
+                    <button class="nav-link" id="mission-tab" data-bs-toggle="pill" data-bs-target="#mission" type="button" role="tab">
+                      <i class="bi bi-rocket-takeoff"></i> Mission Guide
+                    </button>
+                  </li>
+                </ul>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Documentation Content -->
+        <div class="tab-content" id="docTabsContent">
+          <!-- Hardware Setup -->
+          <div class="tab-pane fade show active" id="hardware" role="tabpanel">
+            <div class="row">
+              <div class="col-lg-8">
+                <h3 class="mb-4">Hardware Setup Guide</h3>
+                
+                <div class="accordion" id="hardwareAccordion">
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingOne">
+                      <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne">
+                        <i class="bi bi-cpu me-2"></i> Arduino Mega 2560 Setup
+                      </button>
+                    </h2>
+                    <div id="collapseOne" class="accordion-collapse collapse show" data-bs-parent="#hardwareAccordion">
+                      <div class="accordion-body">
+                        <h5>Power Requirements</h5>
+                        <ul>
+                          <li><strong>Battery Pack:</strong> 18650 cells in series (12V nominal)</li>
+                          <li><strong>Arduino Power:</strong> Connect 12V to VIN pin (onboard regulator steps down to 5V)</li>
+                          <li><strong>Current Draw:</strong> ~200-300mA during operation</li>
+                        </ul>
+                        
+                        <h5 class="mt-4">Pin Connections</h5>
+                        <div class="table-responsive">
+                          <table class="table table-striped">
+                            <thead>
+                              <tr>
+                                <th>Component</th>
+                                <th>Arduino Pin</th>
+                                <th>Function</th>
+                              </tr>
+                            </thead>
+                            <tbody>
+                              <tr>
+                                <td>BMP390 CS</td>
+                                <td>Pin 10</td>
+                                <td>SPI Chip Select</td>
+                              </tr>
+                              <tr>
+                                <td>BMP390 SCK</td>
+                                <td>Pin 13</td>
+                                <td>SPI Clock</td>
+                              </tr>
+                              <tr>
+                                <td>BMP390 MISO</td>
+                                <td>Pin 12</td>
+                                <td>SPI Master In Slave Out</td>
+                              </tr>
+                              <tr>
+                                <td>BMP390 MOSI</td>
+                                <td>Pin 11</td>
+                                <td>SPI Master Out Slave In</td>
+                              </tr>
+                              <tr>
+                                <td>SD Card CS</td>
+                                <td>Pin 53</td>
+                                <td>SPI Chip Select</td>
+                              </tr>
+                              <tr>
+                                <td>GPS TX</td>
+                                <td>Pin 15 (RX3)</td>
+                                <td>Serial Communication</td>
+                              </tr>
+                              <tr>
+                                <td>GPS RX</td>
+                                <td>Pin 14 (TX3)</td>
+                                <td>Serial Communication</td>
+                              </tr>
+                            </tbody>
+                          </table>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTwo">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo">
+                        <i class="bi bi-thermometer-half me-2"></i> Sensor Integration
+                      </button>
+                    </h2>
+                    <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#hardwareAccordion">
+                      <div class="accordion-body">
+                        <h5>BMP390 Pressure Sensor (SPI)</h5>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <ul>
+                              <li><strong>VCC:</strong> 3.3V</li>
+                              <li><strong>GND:</strong> GND</li>
+                              <li><strong>SCK:</strong> Pin 13</li>
+                              <li><strong>MISO:</strong> Pin 12</li>
+                              <li><strong>MOSI:</strong> Pin 11</li>
+                              <li><strong>CS:</strong> Pin 10</li>
+                            </ul>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="alert alert-info">
+                              <strong>Note:</strong> The BMP390 provides pressure, temperature, and altitude readings with high accuracy.
+                            </div>
+                          </div>
+                        </div>
+
+                        <h5 class="mt-4">BNO055 IMU (I2C)</h5>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <ul>
+                              <li><strong>VCC:</strong> 3.3V</li>
+                              <li><strong>GND:</strong> GND</li>
+                              <li><strong>SDA:</strong> Pin A4 (SDA)</li>
+                              <li><strong>SCL:</strong> Pin A5 (SCL)</li>
+                              <li><strong>ADDR:</strong> 0x28</li>
+                            </ul>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="alert alert-info">
+                              <strong>Note:</strong> The BNO055 provides 9-axis motion sensing (gyroscope, accelerometer, magnetometer).
+                            </div>
+                          </div>
+                        </div>
+
+                        <h5 class="mt-4">AS7331 UV Sensors (I2C)</h5>
+                        <div class="row">
+                          <div class="col-md-6">
+                            <ul>
+                              <li><strong>Sensor 1:</strong> ADDR = 0x74</li>
+                              <li><strong>Sensor 2:</strong> ADDR = 0x75</li>
+                              <li><strong>Sensor 3:</strong> ADDR = 0x76</li>
+                              <li><strong>Sensor 4:</strong> ADDR = 0x77</li>
+                            </ul>
+                          </div>
+                          <div class="col-md-6">
+                            <div class="alert alert-warning">
+                              <strong>Important:</strong> UV sensors must be mounted externally for proper light exposure.
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingThree">
+                      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseThree">
+                        <i class="bi bi-gear me-2"></i> PCB Integration
+                      </button>
+                    </h2>
+                    <div id="collapseThree" class="accordion-collapse collapse" data-bs-parent="#hardwareAccordion">
+                      <div class="accordion-body">
+                        <h5>Custom PCB Design</h5>
+                        <p>Our project uses a custom PCB designed to integrate all components efficiently:</p>
+                        <ul>
+                          <li><strong>Arduino Mega Shield:</strong> Breakout boards soldered via headers</li>
+                          <li><strong>Power Management:</strong> 12V to 5V/3.3V regulation</li>
+                          <li><strong>I2C Bus:</strong> Pull-up resistors (4.7kΩ on SDA/SCL)</li>
+                          <li><strong>SPI Bus:</strong> Proper CS pin assignments</li>
+                          <li><strong>EMI Shielding:</strong> Consider for sensitive sensors</li>
+                        </ul>
+
+                        <h5 class="mt-4">Troubleshooting</h5>
+                        <div class="alert alert-danger">
+                          <h6>Common Issues:</h6>
+                          <ul class="mb-0">
+                            <li><strong>I2C Issues:</strong> Check pull-up resistors (4.7kΩ on SDA/SCL)</li>
+                            <li><strong>SPI Issues:</strong> Verify CS pin assignments</li>
+                            <li><strong>GPS No Fix:</strong> Ensure clear sky view, wait 30-60 seconds</li>
+                            <li><strong>SD Card Issues:</strong> Format as FAT32, check connections</li>
+                          </ul>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-download"></i> Download Resources
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-grid gap-2">
+                      <a href="https://github.com/PrestonFurulie/arduino" class="btn btn-primary" target="_blank">
+                        <i class="bi bi-github"></i> Complete Repository
+                      </a>
+                      <button class="btn btn-outline-primary" onclick="downloadPDF('hardware-setup')">
+                        <i class="bi bi-file-pdf"></i> Hardware Setup PDF
+                      </button>
+                      <button class="btn btn-outline-secondary" onclick="downloadPDF('wiring-diagram')">
+                        <i class="bi bi-diagram-3"></i> Wiring Diagram
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mt-3">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-tools"></i> Required Tools
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-unstyled">
+                      <li><i class="bi bi-check-circle text-success"></i> Soldering iron</li>
+                      <li><i class="bi bi-check-circle text-success"></i> Multimeter</li>
+                      <li><i class="bi bi-check-circle text-success"></i> Wire strippers</li>
+                      <li><i class="bi bi-check-circle text-success"></i> Breadboard (for testing)</li>
+                      <li><i class="bi bi-check-circle text-success"></i> Jumper wires</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Software Guide -->
+          <div class="tab-pane fade" id="software" role="tabpanel">
+            <div class="row">
+              <div class="col-lg-8">
+                <h3 class="mb-4">Software Setup Guide</h3>
+                
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-download"></i> Required Libraries
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <p>Install the following libraries through the Arduino IDE Library Manager:</p>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <ul class="list-unstyled">
+                          <li><code>Adafruit BMP3XX</code></li>
+                          <li><code>Adafruit BNO055</code></li>
+                          <li><code>Adafruit Unified Sensor</code></li>
+                          <li><code>SparkFun AS7331</code></li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <ul class="list-unstyled">
+                          <li><code>TinyGPS++</code> (GPS version only)</li>
+                          <li><code>SD</code></li>
+                          <li><code>SPI</code></li>
+                          <li><code>Wire</code></li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-gear"></i> Arduino IDE Setup
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <ol>
+                      <li><strong>Board Selection:</strong> Arduino Mega 2560</li>
+                      <li><strong>Baud Rate:</strong> 115200</li>
+                      <li><strong>Port:</strong> Select appropriate COM port</li>
+                      <li><strong>Libraries:</strong> Install all required libraries</li>
+                    </ol>
+                  </div>
+                </div>
+
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-code-slash"></i> Code Versions
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h6>HailMaryV1c_GPS.ino</h6>
+                        <p>Complete version with GPS integration for accurate timestamps and coordinates.</p>
+                        <a href="https://github.com/PrestonFurulie/arduino/blob/main/src/HailMaryV1c_GPS.ino" 
+                           class="btn btn-sm btn-primary" target="_blank">View Code</a>
+                      </div>
+                      <div class="col-md-6">
+                        <h6>HailMaryV1c_NoGPS.ino</h6>
+                        <p>Clean version without GPS for basic missions and testing.</p>
+                        <a href="https://github.com/PrestonFurulie/arduino/blob/main/src/HailMaryV1c_NoGPS.ino" 
+                           class="btn btn-sm btn-success" target="_blank">View Code</a>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-bug"></i> Troubleshooting
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="alert alert-warning">
+                      <h6>Common Software Issues:</h6>
+                      <ul class="mb-0">
+                        <li><strong>Compilation Errors:</strong> Ensure all libraries are installed</li>
+                        <li><strong>Upload Failures:</strong> Check COM port and board selection</li>
+                        <li><strong>Sensor Not Detected:</strong> Verify wiring and I2C addresses</li>
+                        <li><strong>SD Card Not Working:</strong> Format as FAT32, check connections</li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-file-code"></i> Code Examples
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-grid gap-2">
+                      <button class="btn btn-outline-primary" onclick="showCodeExample('sensor-init')">
+                        <i class="bi bi-cpu"></i> Sensor Initialization
+                      </button>
+                      <button class="btn btn-outline-primary" onclick="showCodeExample('data-logging')">
+                        <i class="bi bi-database"></i> Data Logging
+                      </button>
+                      <button class="btn btn-outline-primary" onclick="showCodeExample('gps-integration')">
+                        <i class="bi bi-satellite"></i> GPS Integration
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Data Analysis -->
+          <div class="tab-pane fade" id="analysis" role="tabpanel">
+            <div class="row">
+              <div class="col-lg-8">
+                <h3 class="mb-4">Data Analysis Guide</h3>
+                
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-table"></i> CSV Data Format
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <h6>GPS Version:</h6>
+                    <code>UTC_Date,UTC_Time,GPS_Fix,elapsed(ms),UV_values...,pressure,temp,altitude,gyro_X/Y/Z,accel_X/Y/Z</code>
+                    
+                    <h6 class="mt-3">No GPS Version:</h6>
+                    <code>elapsed(ms),UV_values...,pressure,temp,altitude,gyro_X/Y/Z,accel_X/Y/Z</code>
+                  </div>
+                </div>
+
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-graph-up"></i> Python Analysis Example
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <pre><code>import pandas as pd
+import matplotlib.pyplot as plt
+
+# Load data
+df = pd.read_csv('data.csv')
+
+# Time series plotting
+plt.figure(figsize=(12, 8))
+plt.subplot(2, 2, 1)
+plt.plot(df['elapsed(ms)'], df['alt_bmp390'])
+plt.title('Altitude vs Time')
+plt.xlabel('Time (ms)')
+plt.ylabel('Altitude (m)')
+
+plt.subplot(2, 2, 2)
+plt.plot(df['elapsed(ms)'], df['temp_bmp390'])
+plt.title('Temperature vs Time')
+plt.xlabel('Time (ms)')
+plt.ylabel('Temperature (°C)')
+
+plt.tight_layout()
+plt.show()</code></pre>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-bar-chart"></i> Key Metrics
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h6>Flight Profile</h6>
+                        <ul>
+                          <li>Ascent Rate</li>
+                          <li>Peak Altitude</li>
+                          <li>Descent Rate</li>
+                          <li>Flight Duration</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <h6>Environmental Data</h6>
+                        <ul>
+                          <li>Temperature Profile</li>
+                          <li>Pressure Profile</li>
+                          <li>UV Exposure</li>
+                          <li>Motion Analysis</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-tools"></i> Analysis Tools
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-grid gap-2">
+                      <button class="btn btn-outline-primary" onclick="downloadTool('python-script')">
+                        <i class="bi bi-file-code"></i> Python Script
+                      </button>
+                      <button class="btn btn-outline-success" onclick="downloadTool('excel-template')">
+                        <i class="bi bi-file-excel"></i> Excel Template
+                      </button>
+                      <button class="btn btn-outline-info" onclick="downloadTool('matlab-script')">
+                        <i class="bi bi-calculator"></i> MATLAB Script
+                      </button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Mission Guide -->
+          <div class="tab-pane fade" id="mission" role="tabpanel">
+            <div class="row">
+              <div class="col-lg-8">
+                <h3 class="mb-4">Mission Operations Guide</h3>
+                
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-checklist"></i> Pre-Launch Checklist
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="row">
+                      <div class="col-md-6">
+                        <h6>Hardware</h6>
+                        <ul>
+                          <li>✓ Battery fully charged</li>
+                          <li>✓ All sensors tested</li>
+                          <li>✓ SD card formatted</li>
+                          <li>✓ GPS antenna clear</li>
+                          <li>✓ Enclosure sealed</li>
+                        </ul>
+                      </div>
+                      <div class="col-md-6">
+                        <h6>Software</h6>
+                        <ul>
+                          <li>✓ Code uploaded and tested</li>
+                          <li>✓ Data logging verified</li>
+                          <li>✓ GPS fix acquired</li>
+                          <li>✓ Serial output monitored</li>
+                          <li>✓ Backup code ready</li>
+                        </ul>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mb-4">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-rocket-takeoff"></i> Launch Procedures
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <ol>
+                      <li><strong>Final Check:</strong> Verify all systems operational</li>
+                      <li><strong>GPS Fix:</strong> Ensure GPS has acquired satellites</li>
+                      <li><strong>Data Logging:</strong> Confirm data is being written to SD card</li>
+                      <li><strong>Launch:</strong> Release balloon at designated time</li>
+                      <li><strong>Tracking:</strong> Monitor initial ascent and data quality</li>
+                    </ol>
+                  </div>
+                </div>
+
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-search"></i> Recovery Procedures
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <ol>
+                      <li><strong>Landing Prediction:</strong> Use wind data to estimate landing zone</li>
+                      <li><strong>GPS Tracking:</strong> Monitor final GPS coordinates</li>
+                      <li><strong>Recovery Team:</strong> Deploy to estimated landing location</li>
+                      <li><strong>Data Retrieval:</strong> Recover payload and SD card</li>
+                      <li><strong>Data Analysis:</strong> Download and analyze mission data</li>
+                    </ol>
+                  </div>
+                </div>
+              </div>
+
+              <div class="col-lg-4">
+                <div class="card">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-file-earmark-text"></i> Mission Documents
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <div class="d-grid gap-2">
+                      <button class="btn btn-outline-primary" onclick="downloadPDF('mission-checklist')">
+                        <i class="bi bi-checklist"></i> Mission Checklist
+                      </button>
+                      <button class="btn btn-outline-success" onclick="downloadPDF('safety-procedures')">
+                        <i class="bi bi-shield-check"></i> Safety Procedures
+                      </button>
+                      <button class="btn btn-outline-info" onclick="downloadPDF('recovery-guide')">
+                        <i class="bi bi-search"></i> Recovery Guide
+                      </button>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="card mt-3">
+                  <div class="card-header">
+                    <h5 class="mb-0">
+                      <i class="bi bi-telephone"></i> Emergency Contacts
+                    </h5>
+                  </div>
+                  <div class="card-body">
+                    <ul class="list-unstyled">
+                      <li><strong>Mission Control:</strong> (555) 123-4567</li>
+                      <li><strong>Recovery Team:</strong> (555) 234-5678</li>
+                      <li><strong>Emergency:</strong> 911</li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</Layout>
+
+<style>
+  .card {
+    border: none;
+    border-radius: 15px;
+    transition: all 0.3s ease;
+  }
+
+  .card:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  }
+
+  .nav-pills .nav-link {
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .nav-pills .nav-link.active {
+    background: linear-gradient(45deg, #0066cc, #004499);
+  }
+
+  .accordion-item {
+    border: none;
+    border-radius: 15px;
+    margin-bottom: 1rem;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+
+  .accordion-button {
+    border-radius: 15px;
+    font-weight: 600;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background: linear-gradient(45deg, #0066cc, #004499);
+    color: white;
+  }
+
+  .table {
+    border-radius: 10px;
+    overflow: hidden;
+  }
+
+  .btn {
+    border-radius: 25px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+  }
+
+  .btn:hover {
+    transform: translateY(-2px);
+  }
+
+  code {
+    background-color: #f8f9fa;
+    padding: 0.2rem 0.4rem;
+    border-radius: 0.25rem;
+    font-size: 0.875rem;
+  }
+
+  pre {
+    background-color: #f8f9fa;
+    padding: 1rem;
+    border-radius: 0.5rem;
+    overflow-x: auto;
+  }
+</style>
+
+<script>
+  function downloadPDF(type) {
+    alert(`Downloading ${type} PDF...`);
+    // In a real application, this would download the actual PDF
+  }
+
+  function downloadTool(tool) {
+    alert(`Downloading ${tool}...`);
+    // In a real application, this would download the tool
+  }
+
+  function showCodeExample(type) {
+    alert(`Showing ${type} code example...`);
+    // In a real application, this would show a code example modal
+  }
+</script>
